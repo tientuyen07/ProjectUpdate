@@ -137,7 +137,7 @@
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:layout_centerInParent="true"
-                        android:background="@drawable/iconsetting" />
+                        android:background="@drawable/icon_account1" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -145,7 +145,7 @@
                         android:layout_alignParentBottom="true"
                         android:layout_centerHorizontal="true"
                         android:paddingBottom="10dp"
-                        android:text="Cài đặt"
+                        android:text="Tài khoản   "
                         android:textColor="#FFFFFF" />
 
                 </RelativeLayout>
@@ -157,8 +157,9 @@
                     android:background="@drawable/img_view_border">
 
                     <ImageView
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:background="@drawable/exit"
                         android:layout_centerInParent="true" />
 
                     <TextView
@@ -167,9 +168,11 @@
                         android:layout_alignParentBottom="true"
                         android:layout_centerHorizontal="true"
                         android:paddingBottom="10dp"
+                        android:text="Thoát chương trình"
                         android:textColor="#FFFFFF" />
 
                 </RelativeLayout>
+
             </TableRow>
         </TableLayout>
     </ScrollView>

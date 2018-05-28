@@ -27,6 +27,11 @@ public interface BaseApiService {
     Call<ResponseBody> registerRequest(@Field("username") String username,
                                        @Field("password") String password);
 
+    @FormUrlEncoded // Mã hóa trước khi post
+    @POST("DoiMatKhau.php")
+    Call<ResponseBody> DoiMatKhau(@Field("username") String username,
+                                       @Field("password") String password);
+
     @FormUrlEncoded
     @POST("getDsPhong.php")
     Call<List<Phong>> getDsPhong(@Field("tbl_dichvu_ma_dichvu") int tbl_dichvu_ma_dichvu);

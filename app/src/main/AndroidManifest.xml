@@ -29,7 +29,8 @@
         <activity android:name=".Fragment.DetailsLichHen" />
         <activity android:name=".Fragment.AccountActivity" />
         <activity android:name=".Fragment.LienHeActivity" />
-        <activity android:name=".Fragment.WebViewLayout"></activity>
+        <activity android:name=".Fragment.WebViewLayout" />
+        <activity android:name=".Fragment.CapNhatTTActivity"></activity>
     </application>
 
 </manifest>

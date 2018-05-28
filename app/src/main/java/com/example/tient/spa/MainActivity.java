@@ -153,6 +153,9 @@ public class MainActivity extends AppCompatActivity {
         Log.i("DEBUG", "Đã set sử dụng lần đầu!!!");
 
         Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putBoolean("DoiMatKhau", false);
+        intent.putExtra("BundleFlagCapNhat", bundle);
 //        mSharedPrefManager.setFirsttimeLauch(true);
         startActivity(intent);
         finish();

@@ -10,7 +10,7 @@ public class SharedPrefManager {
 
     private static final String NAME_APP = "Spa";
     private static final String FIRST_USER = "IsFirstUser";
-    private static final String LOGIN_SUCCESS = "login_sucsess";
+    private static final String LOGIN_SUCCESS = "LOGIN_SUCCESS";
     private static final String USERNAME = "username";
 
     SharedPreferences.Editor editor;

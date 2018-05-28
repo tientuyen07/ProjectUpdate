@@ -88,4 +88,10 @@ public class DashboardActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    @OnClick(R.id.rela_table_6)
+    void Exit() {
+        android.os.Process.killProcess(android.os.Process.myPid());
+        System.exit(1);
+    }
+
 }

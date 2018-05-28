@@ -5,35 +5,125 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Fragment.RegisterActivity">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
         android:orientation="vertical">
-        <EditText
-            android:id="@+id/edt_sdt"
+
+        <RelativeLayout
+            android:id="@+id/linear1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Số điện thoại"/>
-        <EditText
-            android:id="@+id/edt_mk"
+            android:layout_below="@+id/txt_view1"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageButton
+                    android:id="@+id/img_button1"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginTop="7dp"
+                    android:background="@drawable/icon_hoten"
+                    android:scaleType="center" />
+
+                <EditText
+                    android:id="@+id/edt_sdt"
+                    style="@style/Widget.AppCompat.EditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="username"
+                    android:maxLines="1"
+                    android:paddingLeft="30dp">
+
+                    <requestFocus />
+                </EditText>
+            </FrameLayout>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/linear2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPassword"
-            android:hint="Mật khẩu"/>
-        <EditText
-            android:inputType="textPassword"
-            android:id="@+id/edt_repeat_mk"
+            android:layout_below="@+id/linear1"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageButton
+                    android:id="@+id/img_button2"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginTop="7dp"
+                    android:background="@drawable/icon_pw"
+                    android:scaleType="center" />
+
+                <EditText
+                    android:id="@+id/edt_mk"
+                    style="@style/Widget.AppCompat.EditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="Mật Khẩu"
+                    android:maxLines="1"
+                    android:paddingLeft="30dp">
+
+                    <requestFocus />
+                </EditText>
+            </FrameLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linear3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Nhập lại mật khẩu"/>
+            android:layout_below="@+id/linear1"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageButton
+                    android:id="@+id/img_button3"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginTop="7dp"
+                    android:background="@drawable/icon_repeat"
+                    android:scaleType="center" />
+
+                <EditText
+                    android:id="@+id/edt_repeat_mk"
+                    style="@style/Widget.AppCompat.EditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="Nhập lại mật Khẩu"
+                    android:maxLines="1"
+                    android:paddingLeft="30dp">
+
+                    <requestFocus />
+                </EditText>
+            </FrameLayout>
+        </LinearLayout>
+
         <Button
             android:id="@+id/btn_dangky"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:text="Đăng ký"
             android:layout_marginTop="30dp"
-            android:textAllCaps="false"/>
+            android:text="Đăng ký"
+            android:textAllCaps="false"
+            android:textSize="20dp" />
     </LinearLayout>
 </RelativeLayout>

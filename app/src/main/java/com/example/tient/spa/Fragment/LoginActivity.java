@@ -69,9 +69,6 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     @OnClick(R.id.btn_login)
-/*    void LoginAccountFunc() {
-        startActivity(new Intent(mContext, DashboardActivity.class));
-    }*/
     void LoginAccountFunc() {
         mApiService.loginRequest(edit_user.getText().toString(), edit_pass.getText().toString())
                 .enqueue(new Callback<ResponseBody>() {
@@ -83,9 +80,13 @@ public class LoginActivity extends AppCompatActivity {
                                 JSONObject jsonObject = new JSONObject(response.body().string());
                                 if (jsonObject.getString("error").equals("false") && (jsonObject.getInt("level") == 2)) {
                                     Log.i("DEBUG", "NGƯỜI DÙNG    =====>    Đăng nhập thành công!!!!!!!!");
+
+
+                                    // Lưu lại username và set đã đăng nhập thành công
+                                    Intent intent = new Intent(mContext, DashboardActivity.class);
                                     sharedPrefManager.saveSPString("username", edit_user.getText().toString());
-                                    sharedPrefManager.saveSPBoolean("login_success", true);
-                                    startActivity(new Intent(mContext, DashboardActivity.class));
+                                    sharedPrefManager.saveSPBoolean("LOGIN_SUCCESS", true);
+                                    startActivity(intent);
                                     finish();
                                 } else {
                                     Toast.makeText(mContext, jsonObject.getString("error_msg"), Toast.LENGTH_SHORT).show();
