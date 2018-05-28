@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragment.DatLichActivity">
+
+    <EditText
+        android:id="@+id/edit_sdt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Số điện thoại" />
+
+    <EditText
+        android:id="@+id/edit_hvt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/edit_sdt"
+        android:hint="Họ và tên" />
+
+    <TextView
+        android:id="@+id/txt_10"
+        android:layout_width="132dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txt_ngayhen"
+        android:text="Chọn dịch vụ:" />
+
+    <Spinner
+        android:id="@+id/spinner_dv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txt_10">
+
+    </Spinner>
+
+    <TextView
+        android:id="@+id/txt_chon_nv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/spinner_dv"
+        android:text="Chọn nhân viên (Không bắt buộc): " />
+
+    <Spinner
+        android:id="@+id/spinner_nv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txt_chon_nv">
+
+    </Spinner>
+
+    <TextView
+        android:id="@+id/txt_chon_phong"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/spinner_nv"
+        android:text="Chọn Phòng (Không bắt buộc): " />
+
+    <Spinner
+        android:id="@+id/spinner_phong"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txt_chon_phong">
+
+    </Spinner>
+
+    <TextView
+        android:id="@+id/txt_ngayhen"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_below="@+id/edit_hvt"
+        android:gravity="center"
+        android:text="Ngày hẹn: " />
+
+    <Spinner
+        android:id="@+id/spinner_ngayhen"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_below="@id/edit_hvt"
+        android:layout_toRightOf="@+id/txt_ngayhen">
+
+    </Spinner>
+
+    <TextView
+        android:id="@+id/txt_khunggio"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_below="@+id/spinner_phong"
+        android:text="Chọn khung giờ: " />
+
+    <GridView
+        android:id="@+id/grid_view"
+        android:layout_width="wrap_content"
+        android:layout_height="180dp"
+        android:layout_below="@id/txt_khunggio"
+        android:listSelector="@drawable/list_selector"
+        android:numColumns="3">
+
+    </GridView>
+
+    <Button
+        android:id="@+id/btn_datlich"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/grid_view"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:text="Đặt lịch" />
+
+</RelativeLayout>

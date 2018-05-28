@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="430dp"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true">
+
+        <TextView
+            android:id="@+id/tv_nh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ngày hẹn: "
+            android:textSize="18dp" />
+
+        <TextView
+            android:id="@+id/tv_ngay_hen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/tv_nh"
+            android:textSize="18dp" />
+
+        <TextView
+            android:id="@+id/tv_kg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_nh"
+            android:text="Khung giờ hẹn: "
+            android:textSize="18dp" />
+
+        <TextView
+            android:id="@+id/tv_khung_gio_hen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_nh"
+            android:layout_toRightOf="@id/tv_kg"
+            android:textSize="18dp" />
+        <TextView
+            android:id="@+id/tv_dv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_kg"
+            android:text="Dịch vụ: "
+            android:textSize="18dp" />
+
+        <TextView
+            android:id="@+id/tv_dich_vu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_kg"
+            android:layout_toRightOf="@id/tv_dv"
+            android:textSize="18dp" />
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">Spa</string>
+    <string name="title_activity_welcome">Home Screen</string>
+    <string name="next">NEXT</string>
+    <string name="skip">SKIP</string>
+    <string name="start">GOT IT</string>
+
+    <string name="slide_1_title">Không gian lý tưởng!</string>
+    <string name="slide_1_desc"></string>
+
+    <string name="slide_2_title">Các dịch vụ Spa đa dạng, phong phú!</string>
+    <string name="slide_2_desc"></string>
+
+    <string name="slide_3_title">Đội ngũ nhân viên giàu kinh nghiệm!</string>
+    <string name="slide_3_desc"></string>
+
+    <string name="slide_4_title">Tận hưởng những phút giây thư giãn!</string>
+    <string name="slide_4_desc"></string>
+
+    <string name="play_again_desc">To see the welcome slider again, goto Settings -> apps -> welcome slider -> clear data</string>
+    <string name="play_again">Play Again</string>
+</resources>

@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragment.LoginActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/img_view1"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="70dp"
+            android:background="@drawable/logo"
+            android:scaleType="fitCenter" />
+
+        <TextView
+            android:id="@+id/txt_view1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/img_view1"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:text="Welcome"
+            android:textSize="25dp" />
+
+        <LinearLayout
+            android:id="@+id/linear1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txt_view1"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageButton
+                    android:id="@+id/img_button1"
+                    android:layout_width="25dp"
+                    android:layout_marginTop="7dp"
+                    android:layout_height="25dp"
+                    android:background="@drawable/icon_mobile"
+                    android:scaleType="center" />
+
+                <EditText
+                    android:id="@+id/edit1"
+                    style="@style/Widget.AppCompat.EditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="Số điện thoại"
+                    android:maxLines="1"
+                    android:paddingLeft="25dp">
+
+                    <requestFocus />
+                </EditText>
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageButton
+                    android:id="@+id/img_button2"
+                    android:layout_width="25dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_height="25dp"
+                    android:background="@drawable/icon_lock_cp"
+                    android:scaleType="fitCenter" />
+
+                <EditText
+                    android:id="@+id/edit2"
+                    style="@style/Widget.AppCompat.EditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/edit1"
+                    android:hint="Mật khẩu"
+                    android:inputType="textPassword"
+                    android:maxLines="1"
+                    android:paddingLeft="25dp">
+
+                    <requestFocus />
+                </EditText>
+            </FrameLayout>
+
+            <Button
+                android:id="@+id/btn_login"
+                android:layout_marginTop="10dp"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Đăng nhập"
+                android:background="@drawable/my_button_border"
+                android:textAllCaps="false"
+                android:textSize="25dp" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/relative1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/linear1">
+
+            <TextView
+                android:id="@+id/txt_view2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:text="or"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="24dp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="80dp"
+                android:layout_toLeftOf="@+id/txt_view2"
+                android:background="#FF0000" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="80dp"
+                android:layout_toRightOf="@+id/txt_view2"
+                android:background="#FF0000" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/relative1"
+            android:layout_centerHorizontal="true">
+
+            <Button
+                android:id="@+id/btn_register"
+                android:layout_width="250dp"
+                android:background="@drawable/my_button_border"
+                android:layout_height="wrap_content"
+                android:textSize="25dp"
+                android:textAllCaps="false"
+                android:text="Đăng ký" />
+        </RelativeLayout>
+        <TextView
+            android:id="@+id/txt_view_forget_pw"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Quên mật khẩu?"
+            android:textSize="18dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerInParent="true"/>
+    </RelativeLayout>
+</RelativeLayout>

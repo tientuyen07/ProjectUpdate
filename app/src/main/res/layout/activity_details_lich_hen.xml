@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragment.DetailsLichHen">
+
+    <TextView
+        android:id="@+id/hvtkh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Họ và tên: "
+        android:textSize="23dp" />
+
+    <TextView
+        android:id="@+id/tvhvtkh"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@+id/hvtkh"
+        android:textSize="23dp"
+        android:textStyle="italic" />
+
+    <TextView
+        android:id="@+id/sdtkh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/hvtkh"
+        android:layout_marginTop="10dp"
+        android:text="Số điện thoại: "
+        android:textSize="23dp" />
+
+    <TextView
+        android:id="@+id/tvsdtkh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/hvtkh"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@+id/sdtkh"
+        android:textSize="23dp"
+        android:textStyle="italic" />
+
+    <TextView
+        android:id="@+id/tdv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/sdtkh"
+        android:layout_marginTop="10dp"
+        android:text="Tên dịch vụ: "
+        android:textSize="23dp" />
+
+    <TextView
+        android:id="@+id/tvtdv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/sdtkh"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@+id/tdv"
+        android:textSize="23dp"
+        android:textStyle="italic" />
+
+    <TextView
+        android:id="@+id/ngh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tdv"
+        android:layout_marginTop="10dp"
+        android:text="Ngày hẹn: "
+        android:textSize="23dp" />
+
+    <TextView
+        android:id="@+id/tvngh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tdv"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@+id/ngh"
+        android:textSize="23dp"
+        android:textStyle="italic" />
+
+    <TextView
+        android:id="@+id/kg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ngh"
+        android:layout_marginTop="10dp"
+        android:text="Thời gian: "
+        android:textSize="23dp" />
+
+    <TextView
+        android:id="@+id/tvkg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ngh"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@+id/kg"
+        android:textSize="23dp"
+        android:textStyle="italic" />
+
+    <TextView
+        android:id="@+id/nv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/kg"
+        android:layout_marginTop="10dp"
+        android:text="Nhân viên phục vụ: "
+        android:textSize="23dp" />
+
+    <TextView
+        android:id="@+id/tvnv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/kg"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@+id/nv"
+        android:textSize="23dp"
+        android:textStyle="italic" />
+
+    <TextView
+        android:id="@+id/p"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/nv"
+        android:layout_marginTop="10dp"
+        android:text="Phòng: "
+        android:textSize="23dp" />
+
+    <TextView
+        android:id="@+id/tvp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/nv"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@+id/p"
+        android:textSize="23dp"
+        android:textStyle="italic" />
+
+</RelativeLayout>

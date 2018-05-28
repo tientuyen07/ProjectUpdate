@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragment.DashboardActivity">
+
+    <com.daimajia.slider.library.SliderLayout
+        android:id="@+id/daimajia_slider"
+        android:layout_width="match_parent"
+        android:layout_height="183dp" />
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/daimajia_slider">
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/daimajia_slider">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="140dp">
+
+                <RelativeLayout
+                    android:id="@+id/rela_table_1"
+                    android:layout_width="180dp"
+                    android:layout_height="140dp"
+                    android:background="@drawable/img_view_border">
+
+                    <ImageView
+                        android:layout_width="80dp"
+                        android:layout_height="60dp"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/service_icon" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
+                        android:paddingBottom="10dp"
+                        android:text="Dịch vụ"
+                        android:textColor="#FFFFFF" />
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:id="@+id/rela_table_2"
+                    android:layout_width="205dp"
+                    android:layout_height="140dp"
+                    android:background="@drawable/img_view_border">
+
+                    <ImageView
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/schedule_appointment" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
+                        android:paddingBottom="10dp"
+                        android:text="Đặt lịch Spa"
+                        android:textColor="#FFFFFF" />
+                </RelativeLayout>
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:id="@+id/rela_table_3"
+                    android:layout_width="205dp"
+                    android:layout_height="140dp"
+                    android:background="@drawable/img_view_border">
+
+                    <ImageView
+                        android:layout_width="70dp"
+                        android:layout_height="60dp"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/schedule_icon_white" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
+                        android:paddingBottom="10dp"
+                        android:text="Quản lý lịch hẹn"
+                        android:textColor="#FFFFFF" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rela_table_4"
+                    android:layout_width="205dp"
+                    android:layout_height="140dp"
+                    android:background="@drawable/img_view_border">
+
+                    <ImageView
+                        android:layout_width="90dp"
+                        android:layout_height="70dp"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/contact" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
+                        android:paddingBottom="10dp"
+                        android:text="Liên hệ"
+                        android:textColor="#FFFFFF" />
+
+                </RelativeLayout>
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:id="@+id/rela_table_5"
+                    android:layout_width="205dp"
+                    android:layout_height="140dp"
+                    android:background="@drawable/img_view_border">
+
+                    <ImageView
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/iconsetting" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
+                        android:paddingBottom="10dp"
+                        android:text="Cài đặt"
+                        android:textColor="#FFFFFF" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rela_table_6"
+                    android:layout_width="205dp"
+                    android:layout_height="140dp"
+                    android:background="@drawable/img_view_border">
+
+                    <ImageView
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:layout_centerInParent="true" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
+                        android:paddingBottom="10dp"
+                        android:textColor="#FFFFFF" />
+
+                </RelativeLayout>
+            </TableRow>
+        </TableLayout>
+    </ScrollView>
+
+</RelativeLayout>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragment.LichSuDatLich">
+
+    <TextView
+        android:id="@+id/tv_nsdt"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginTop="5dp"
+        android:gravity="center"
+        android:text="Nhập số điện thoại đặt lịch: "
+        android:textSize="18dp" />
+
+    <EditText
+        android:id="@+id/edit_lich_su_sdt"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@+id/tv_nsdt"
+        android:textSize="18dp" />
+
+    <Button
+        android:id="@+id/btn_xem_lich_su"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_nsdt"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:text="Xem lịch sử"
+        android:textAllCaps="false" />
+
+    <ListView
+        android:id="@+id/lv_qllh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/btn_xem_lich_su">
+
+    </ListView>
+
+</RelativeLayout>

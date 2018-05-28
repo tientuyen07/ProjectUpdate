@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/item_xemlh"
+        android:title="Xem chi tiết lịch hẹn" />
+    <item
+        android:id="@+id/item_sualh"
+        android:title="Sửa lịch hẹn" />
+</menu>
