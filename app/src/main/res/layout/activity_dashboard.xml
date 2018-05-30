@@ -22,7 +22,7 @@
             android:layout_below="@+id/daimajia_slider">
 
             <TableRow
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="140dp">
 
                 <RelativeLayout
@@ -50,7 +50,7 @@
 
                 <RelativeLayout
                     android:id="@+id/rela_table_2"
-                    android:layout_width="205dp"
+                    android:layout_width="180dp"
                     android:layout_height="140dp"
                     android:background="@drawable/img_view_border">
 
@@ -78,7 +78,7 @@
 
                 <RelativeLayout
                     android:id="@+id/rela_table_3"
-                    android:layout_width="205dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="140dp"
                     android:background="@drawable/img_view_border">
 
@@ -101,7 +101,7 @@
 
                 <RelativeLayout
                     android:id="@+id/rela_table_4"
-                    android:layout_width="205dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="140dp"
                     android:background="@drawable/img_view_border">
 
@@ -129,7 +129,7 @@
 
                 <RelativeLayout
                     android:id="@+id/rela_table_5"
-                    android:layout_width="205dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="140dp"
                     android:background="@drawable/img_view_border">
 
@@ -152,7 +152,7 @@
 
                 <RelativeLayout
                     android:id="@+id/rela_table_6"
-                    android:layout_width="205dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="140dp"
                     android:background="@drawable/img_view_border">
 

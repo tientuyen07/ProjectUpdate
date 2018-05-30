@@ -69,6 +69,7 @@ public class DatLichActivity extends AppCompatActivity {
     BaseApiService mApiService;
     boolean flag_capnhat = true;
     boolean flag[] = {false, false, false, false, false, false, false, false, false};
+    boolean flag_selected_kg = true;
 
     // Các tham số trong bảng lịch hẹn, sử dụng khi chọn chức năng cập nhật, get dữ liệu từ Bundle
     String d_v;
@@ -172,6 +173,7 @@ public class DatLichActivity extends AppCompatActivity {
         });
     }
 
+    // Load khung giờ lên GridView
     public void load_khunggio() {
         khunggio_details = getListKhungGio();
         final GridView gridView = (GridView) findViewById(R.id.grid_view);
@@ -180,6 +182,7 @@ public class DatLichActivity extends AppCompatActivity {
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                flag_selected_kg = false;
                 Object o = gridView.getItemAtPosition(position);
                 KhungGio khungGio = (KhungGio) o;
                 lichhen.setKhunggio(((KhungGio) o).getKhunggio() + "");
@@ -214,6 +217,7 @@ public class DatLichActivity extends AppCompatActivity {
                 spinner_dv.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                        flag_selected_kg = true;
                         DichVu dichVu = (DichVu) spinner_dv.getSelectedItem();
                         Log.i("DEBUG", dichVu.getMa_dichvu() + " " + dichVu.getTendichvu() + " " + dichVu.getGiadichvu());
                         load_phong(dichVu.getMa_dichvu());
@@ -327,6 +331,7 @@ public class DatLichActivity extends AppCompatActivity {
     }
 
 
+    // Load danh sách khung giờ lên GridView
     private ArrayList<KhungGio> getListKhungGio() {
         ArrayList<KhungGio> arrayList = new ArrayList<KhungGio>();
         arrayList.add(new KhungGio("7:30 - 9:00", "NV chưa có lịch", "Còn chỗ"));
@@ -341,7 +346,7 @@ public class DatLichActivity extends AppCompatActivity {
         return arrayList;
     }
 
-
+    // Load danh sách khung giờ mà phòng đã đầy lên
     public void GioTheoPhong(String ngayhen, String tbl_dichvu_has_tbl_phong_tbl_phong_maphong) {
         mApiService.GioTheoPhong(ngayhen, tbl_dichvu_has_tbl_phong_tbl_phong_maphong).enqueue(new Callback<List<KhungGio>>() {
             @Override
@@ -367,6 +372,7 @@ public class DatLichActivity extends AppCompatActivity {
         });
     }
 
+    // Load danh sách khung giờ mà nhân viên bận lên
     public void GioTheoNV(String ngayhen, int tbl_nhanvien_id_nhanvien) {
         mApiService.GioTheoNV(ngayhen, tbl_nhanvien_id_nhanvien).enqueue(new Callback<List<KhungGio>>() {
             @Override
@@ -420,12 +426,15 @@ public class DatLichActivity extends AppCompatActivity {
             }
         }
 
+        // Nếu sđt và hvt đã được điền đầy đủ
+        // Nếu khung giờ không bị trùng
         if (flag_sdt && flag_hvt && flag_khunggio) {
             if (flag_capnhat == true) {
                 DichVu dv = (DichVu) spinner_dv.getSelectedItem();
                 NhanVien nv = (NhanVien) spinner_nv.getSelectedItem();
                 Phong p = (Phong) spinner_phong.getSelectedItem();
                 String ngay = (String) spinner_ngayhen.getSelectedItem();
+
                 mApiService.UpdateLich(ID, ngay, lichhen.getKhunggio() + "", editSdt.getText().toString(), editHvt.getText().toString(),
                         dv.getMa_dichvu(), nv.getId_nhanvien(), p.getTbl_phong_maphong(), 0).enqueue(new Callback<List<DatLich>>() {
                     @Override
@@ -440,7 +449,18 @@ public class DatLichActivity extends AppCompatActivity {
                     }
                 });
             }
-            if (flag_capnhat == false) {
+
+            // Nếu đổi sang dịch vụ khác --> Khung giờ load lại.
+            // Sau khi load lại mà chưa chọn khung giờ, xong gửi luôn sẽ báo khung giờ chưa chọn
+            Log.i("DEBUG", "" + flag_selected_kg);
+            if (flag_selected_kg) {
+                Toast.makeText(mContext, "Bạn chưa chọn khung giờ!", Toast.LENGTH_SHORT).show();
+            }
+
+            // Nếu không phải là cập nhật mà là đặt lịch mới
+            // Nếu khung giờ đã được chọn => Gửi đặt lịch
+            // Lỗi nếu sđt đã đặt lịch cùng ngày và giờ với dữ liệu có sẵn
+            if (flag_capnhat == false && flag_selected_kg == false) {
                 mApiService.DatLich(lichhen.getNgayhen(),
                         lichhen.getKhunggio(),
                         editSdt.getText().toString(),
@@ -453,8 +473,23 @@ public class DatLichActivity extends AppCompatActivity {
                             @Override
                             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                                 if (response.isSuccessful()) {
-                                    Toast.makeText(mContext, "Đặt lịch thành công", Toast.LENGTH_SHORT).show();
-                                    Log.i("DEBUG", "Đặt lịch thành công!!!!!!!!!!!!!");
+                                    try {
+                                        JSONObject jsonObject = new JSONObject(response.body().string());
+
+                                        // Nếu error = false -----> Success!!!!!
+                                        if (jsonObject.getString("error").equals("false")) {
+                                            Toast.makeText(mContext, "Đặt lịch thành công", Toast.LENGTH_SHORT).show();
+                                            Log.i("DEBUG", "Đặt lịch thành công!!!!!!!!!!!!!");
+                                        } else {
+                                            String error_message = jsonObject.getString("error_msg");
+                                            Toast.makeText(mContext, error_message, Toast.LENGTH_LONG).show();
+                                            Log.i("DEBUG", "Đặt lịch thất bại!!!!!!!!!!!!!");
+                                        }
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                    }
                                 }
                             }
 

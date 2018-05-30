@@ -79,7 +79,8 @@ public class DashboardActivity extends AppCompatActivity {
 
     @OnClick(R.id.rela_table_4)
     void LienHe() {
-
+        Intent intent = new Intent(mContext, LienHeActivity.class);
+        startActivity(intent);
     }
 
     @OnClick(R.id.rela_table_5)
@@ -91,6 +92,10 @@ public class DashboardActivity extends AppCompatActivity {
     @OnClick(R.id.rela_table_6)
     void Exit() {
         android.os.Process.killProcess(android.os.Process.myPid());
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
         System.exit(1);
     }
 

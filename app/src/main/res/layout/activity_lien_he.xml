@@ -6,4 +6,135 @@
     android:layout_height="match_parent"
     tools:context=".Fragment.LienHeActivity">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="31dp"
+        android:text="HỆ THỐNG SPA "
+        android:textSize="35dp" />
+
+    <TextView
+        android:id="@+id/tvcs2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvemail"
+        android:text="Cơ sở 2: "
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/tvdc2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvcs2"
+        android:layout_marginLeft="40dp"
+        android:text="50 Giải Phóng, Thanh Xuân, Hà Nội"
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/tv_hl2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvdc2"
+        android:layout_marginLeft="40dp"
+        android:text="Hotline:  "
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/lh_sdt_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvdc2"
+        android:layout_toRightOf="@+id/tv_hl2"
+        android:text="0964446496"
+        android:textColor="#FF0000"
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/tvemail2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_hl2"
+        android:layout_marginLeft="40dp"
+        android:text="Email:  "
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/emailcs2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_hl2"
+        android:layout_toRightOf="@id/tvemail2"
+        android:text="xuantung1796@gmail.com"
+        android:textSize="20dp"
+        android:textStyle="italic" />
+
+    <TextView
+        android:id="@+id/tvcs1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="90dp"
+        android:text="Cơ sở 1: "
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/tvdc1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvcs1"
+        android:layout_marginLeft="40dp"
+        android:text="50 Trần Đại Nghĩa, Hai Bà Trưng, Hà Nội"
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/tv_hl1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvdc1"
+        android:layout_marginLeft="40dp"
+        android:text="Hotline:  "
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/tvemail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_hl1"
+        android:layout_marginLeft="40dp"
+        android:text="Email:  "
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/emailcs1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_hl1"
+        android:layout_toRightOf="@id/tvemail"
+        android:text="tientuyen07@gmail.com"
+        android:textSize="20dp"
+        android:textStyle="italic" />
+
+
+    <TextView
+        android:id="@+id/lh_sdt_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvdc1"
+        android:layout_toRightOf="@+id/tv_hl1"
+        android:text="01689850624"
+        android:textColor="#FF0000"
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/chiduong"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvemail2"
+        android:layout_marginTop="20dp"
+        android:text="Bản đồ đến SPA"
+        android:textColor="#333333"
+        android:textSize="20dp"
+        android:textStyle="italic" />
 </RelativeLayout>
