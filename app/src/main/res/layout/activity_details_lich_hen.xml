@@ -21,7 +21,7 @@
         android:layout_marginTop="10dp"
         android:layout_toRightOf="@+id/hvtkh"
         android:textSize="23dp"
-        android:textStyle="italic" />
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/sdtkh"
@@ -40,7 +40,7 @@
         android:layout_marginTop="10dp"
         android:layout_toRightOf="@+id/sdtkh"
         android:textSize="23dp"
-        android:textStyle="italic" />
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/tdv"
@@ -59,7 +59,7 @@
         android:layout_marginTop="10dp"
         android:layout_toRightOf="@+id/tdv"
         android:textSize="23dp"
-        android:textStyle="italic" />
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/ngh"
@@ -78,7 +78,7 @@
         android:layout_marginTop="10dp"
         android:layout_toRightOf="@+id/ngh"
         android:textSize="23dp"
-        android:textStyle="italic" />
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/kg"
@@ -97,7 +97,7 @@
         android:layout_marginTop="10dp"
         android:layout_toRightOf="@+id/kg"
         android:textSize="23dp"
-        android:textStyle="italic" />
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/nv"
@@ -116,7 +116,7 @@
         android:layout_marginTop="10dp"
         android:layout_toRightOf="@+id/nv"
         android:textSize="23dp"
-        android:textStyle="italic" />
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/p"
@@ -135,6 +135,6 @@
         android:layout_marginTop="10dp"
         android:layout_toRightOf="@+id/p"
         android:textSize="23dp"
-        android:textStyle="italic" />
+        android:textStyle="bold" />
 
 </RelativeLayout>

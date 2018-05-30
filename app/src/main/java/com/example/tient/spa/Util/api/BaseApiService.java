@@ -2,6 +2,7 @@ package com.example.tient.spa.Util.api;
 
 import com.example.tient.spa.Model.DatLich;
 import com.example.tient.spa.Model.DichVu;
+import com.example.tient.spa.Model.KhachHang;
 import com.example.tient.spa.Model.KhungGio;
 import com.example.tient.spa.Model.MyPham;
 import com.example.tient.spa.Model.NhanVien;
@@ -25,12 +26,14 @@ public interface BaseApiService {
     @FormUrlEncoded // Mã hóa trước khi post
     @POST("register.php")
     Call<ResponseBody> registerRequest(@Field("username") String username,
-                                       @Field("password") String password);
+                                       @Field("password") String password,
+                                       @Field("sdt") String sdt);
 
     @FormUrlEncoded // Mã hóa trước khi post
     @POST("DoiMatKhau.php")
     Call<ResponseBody> DoiMatKhau(@Field("username") String username,
-                                       @Field("password") String password);
+                                  @Field("password") String password,
+                                  @Field("password_old") String password_old);
 
     @FormUrlEncoded
     @POST("getDsPhong.php")
@@ -68,6 +71,10 @@ public interface BaseApiService {
                                    @Field("tbl_nhanvien_id_nhanvien") int tbl_nhanvien_id_nhanvien,
                                    @Field("tbl_dichvu_has_tbl_phong_tbl_phong_maphong") String tbl_dichvu_has_tbl_phong_tbl_phong_maphong,
                                    @Field("xacnhan") int xacnhan);
+
+    @FormUrlEncoded
+    @POST("ThongTinKH.php")
+    Call<List<KhachHang>> ThongTinKH(@Field("username") String username);
 
     @FormUrlEncoded
     @POST("CapNhatThongTin.php")

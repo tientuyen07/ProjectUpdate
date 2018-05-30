@@ -116,7 +116,6 @@
         android:textSize="20dp"
         android:textStyle="italic" />
 
-
     <TextView
         android:id="@+id/lh_sdt_1"
         android:layout_width="wrap_content"
@@ -127,14 +126,4 @@
         android:textColor="#FF0000"
         android:textSize="20dp" />
 
-    <TextView
-        android:id="@+id/chiduong"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tvemail2"
-        android:layout_marginTop="20dp"
-        android:text="Bản đồ đến SPA"
-        android:textColor="#333333"
-        android:textSize="20dp"
-        android:textStyle="italic" />
 </RelativeLayout>

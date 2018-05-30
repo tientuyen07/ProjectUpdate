@@ -13,6 +13,40 @@
         android:orientation="vertical">
 
         <RelativeLayout
+            android:id="@+id/linear4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txt_view1"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageButton
+                    android:id="@+id/img_button4"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginTop="7dp"
+                    android:background="@drawable/icon_mobile_1"
+                    android:scaleType="center" />
+
+                <EditText
+                    android:id="@+id/edt_sdt"
+                    style="@style/Widget.AppCompat.EditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="Số điện thoại liên hệ"
+                    android:maxLines="1"
+                    android:paddingLeft="32dp">
+
+                    <requestFocus />
+                </EditText>
+            </FrameLayout>
+        </RelativeLayout>
+        <RelativeLayout
             android:id="@+id/linear1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -27,20 +61,20 @@
 
                 <ImageButton
                     android:id="@+id/img_button1"
-                    android:layout_width="25dp"
+                    android:layout_width="30dp"
                     android:layout_height="25dp"
                     android:layout_marginTop="7dp"
                     android:background="@drawable/icon_hoten"
                     android:scaleType="center" />
 
                 <EditText
-                    android:id="@+id/edt_sdt"
+                    android:id="@+id/edt_username"
                     style="@style/Widget.AppCompat.EditText"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:hint="username"
+                    android:hint="Tài khoản"
                     android:maxLines="1"
-                    android:paddingLeft="30dp">
+                    android:paddingLeft="32dp">
 
                     <requestFocus />
                 </EditText>
@@ -75,7 +109,8 @@
                     android:layout_height="match_parent"
                     android:hint="Mật Khẩu"
                     android:maxLines="1"
-                    android:paddingLeft="30dp">
+                    android:inputType="textPassword"
+                    android:paddingLeft="32dp">
 
                     <requestFocus />
                 </EditText>
@@ -110,6 +145,7 @@
                     android:layout_height="match_parent"
                     android:hint="Nhập lại mật Khẩu"
                     android:maxLines="1"
+                    android:inputType="textPassword"
                     android:paddingLeft="30dp">
 
                     <requestFocus />

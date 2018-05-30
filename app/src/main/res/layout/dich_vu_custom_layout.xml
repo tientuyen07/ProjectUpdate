@@ -9,10 +9,10 @@
         android:layout_height="100dp">
 
         <ImageView
-            android:layout_centerInParent="true"
             android:id="@+id/img_dich_vu"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -25,17 +25,19 @@
             android:id="@+id/tv_ten_dich_vu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:textColor="#440000"
             android:textSize="20dp"
-            android:textStyle="bold"
-            android:layout_marginTop="20dp" />
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tv_gia_dich_vu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tv_ten_dich_vu"
+            android:textColor="#000000"
             android:textSize="18dp"
-            android:textStyle="italic"/>
+            android:textStyle="italic" />
 
     </RelativeLayout>
 </RelativeLayout>

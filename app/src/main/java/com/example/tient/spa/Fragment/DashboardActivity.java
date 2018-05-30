@@ -1,5 +1,6 @@
 package com.example.tient.spa.Fragment;
 
+import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -34,6 +35,9 @@ public class DashboardActivity extends AppCompatActivity {
         setContentView(R.layout.activity_dashboard);
         ButterKnife.bind(this);
         mContext = DashboardActivity.this;
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        getSupportActionBar().setCustomView(R.layout.abs_layout);
 
         // Slider Layout
         HashMap<String, Integer> file_maps = new HashMap<String, Integer>();
@@ -74,7 +78,11 @@ public class DashboardActivity extends AppCompatActivity {
 
     @OnClick(R.id.rela_table_3)
     void QuanLyLichHen() {
-        startActivity(new Intent(mContext, LichSuDatLich.class));
+        Bundle bundle = new Bundle();
+        Intent intent = new Intent(mContext, LichSuDatLich.class);
+        bundle.putBoolean("FLAG_LUU_ARRAY", true);
+        intent.putExtra("BUNDLE_FLAG_LUU_ARRAY", bundle);
+        startActivity(intent);
     }
 
     @OnClick(R.id.rela_table_4)
@@ -99,4 +107,20 @@ public class DashboardActivity extends AppCompatActivity {
         System.exit(1);
     }
 
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        android.os.Process.killProcess(android.os.Process.myPid());
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        System.exit(1);
+    }
 }

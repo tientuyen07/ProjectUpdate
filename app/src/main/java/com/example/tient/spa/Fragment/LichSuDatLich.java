@@ -1,5 +1,6 @@
 package com.example.tient.spa.Fragment;
 
+import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Parcelable;
@@ -56,11 +57,16 @@ public class LichSuDatLich extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quan_ly_lich_hen);
         ButterKnife.bind(this);
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         mContext = LichSuDatLich.this;
         mApiService = UtilsApi.getApiService();
+
+        Bundle bundle = getIntent().getBundleExtra("BUNDLE_FLAG_LUU_ARRAY");
+        Boolean flag_luu_array = bundle.getBoolean("FLAG_LUU_ARRAY");
+        if (flag_luu_array) {
+            editLichSuSdt.setText(bundle.getString("SDT"));
+        }
 
         arrLichSu = new ArrayList<DatLich>();
         adapter = new LichSuArrayAdapter(this, R.layout.layout_custom_lich_su, arrLichSu);
@@ -74,8 +80,41 @@ public class LichSuDatLich extends AppCompatActivity {
             }
         });
 
+
         registerForContextMenu(lvQLLH);
 
+        if (flag_luu_array) {
+            arrLichSu.clear();
+            mApiService.LichSuDatLich(bundle.getString("SDT")).enqueue(new Callback<List<DatLich>>() {
+                @Override
+                public void onResponse(Call<List<DatLich>> call, Response<List<DatLich>> response) {
+                    List<DatLich> list = response.body();
+                    for (int i = 0; i < list.size(); i++) {
+                        DatLich datLich = new DatLich();
+                        datLich.setKhunggio(list.get(i).getKhunggio() + "");
+                        datLich.setNgayhen(list.get(i).getNgayhen() + "");
+                        datLich.setTendichvu(list.get(i).getTendichvu() + "");
+                        datLich.setId_lichhen(list.get(i).getId_lichhen());
+                        datLich.setTbl_nhanvien_id_nhanvien(list.get(i).getTbl_nhanvien_id_nhanvien());
+                        datLich.setSdt_datlich(list.get(i).getSdt_datlich() + "");
+                        datLich.setHoten(list.get(i).getHoten() + "");
+                        datLich.setTbl_dichvu_has_tbl_phong_tbl_dichvu_ma_dichvu(list.get(i).getTbl_dichvu_has_tbl_phong_tbl_dichvu_ma_dichvu());
+                        datLich.setHoten_datlich(list.get(i).getHoten_datlich() + "");
+                        datLich.setTbl_dichvu_has_tbl_phong_tbl_phong_maphong(list.get(i).getTbl_dichvu_has_tbl_phong_tbl_phong_maphong() + "");
+                        arrLichSu.add(datLich);
+                        adapter.notifyDataSetChanged();
+                    }
+                    if (list.size() == 0) {
+                        Toast.makeText(mContext, "Số điện thoại sai hoặc bạn chưa từng đặt lịch", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<List<DatLich>> call, Throwable t) {
+
+                }
+            });
+        }
     }
 
     @Override
@@ -98,6 +137,7 @@ public class LichSuDatLich extends AppCompatActivity {
                 bundle.putString("TenKhach", luuDatLich.getHoten_datlich() + "");
                 bundle.putString("SDT", luuDatLich.getSdt_datlich() + "");
                 bundle.putString("TenNhanVien", luuDatLich.getHoten() + "");
+                bundle.putBoolean("FLAG_LUU_ARRAY", true);
                 intent.putExtra("BundleLichHen", bundle);
                 startActivity(intent);
                 break;

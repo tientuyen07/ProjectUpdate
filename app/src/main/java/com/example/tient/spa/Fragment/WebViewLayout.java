@@ -1,6 +1,7 @@
 package com.example.tient.spa.Fragment;
 
 import android.annotation.TargetApi;
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -17,6 +18,7 @@ import com.example.tient.spa.R;
 public class WebViewLayout extends AppCompatActivity {
 
     private WebView mWebview;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,7 +27,7 @@ public class WebViewLayout extends AppCompatActivity {
         Bundle bundle = getIntent().getBundleExtra("DICHVU");
         String mota = bundle.getString("MoTa");
         Log.i("DEBUG", mota);
-        mWebview  = new WebView(this);
+        mWebview = new WebView(this);
 
         mWebview.getSettings().setJavaScriptEnabled(true); // enable javascript
 
@@ -37,6 +39,7 @@ public class WebViewLayout extends AppCompatActivity {
             public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
                 Toast.makeText(activity, description, Toast.LENGTH_SHORT).show();
             }
+
             @TargetApi(android.os.Build.VERSION_CODES.M)
             @Override
             public void onReceivedError(WebView view, WebResourceRequest req, WebResourceError rerr) {
@@ -45,9 +48,10 @@ public class WebViewLayout extends AppCompatActivity {
             }
         });
 
-        mWebview .loadUrl(mota);
-        setContentView(mWebview );
+        mWebview.loadUrl(mota);
+        setContentView(mWebview);
     }
+
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();

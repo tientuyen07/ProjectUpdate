@@ -1,5 +1,6 @@
 package com.example.tient.spa.Fragment;
 
+import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -49,6 +50,9 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         sharedPrefManager = new SharedPrefManager(this);
+        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        getSupportActionBar().setCustomView(R.layout.abs_layout);
+
         // Nếu đã đăng nhập thành công lúc trước thì tự động vào màn hình chính
         if (sharedPrefManager.getSPLoginSuccess()) {
             startActivity(new Intent(LoginActivity.this, DashboardActivity.class));

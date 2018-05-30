@@ -1,5 +1,6 @@
 package com.example.tient.spa.Fragment;
 
+import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -10,10 +11,13 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.tient.spa.Model.KhachHang;
 import com.example.tient.spa.R;
 import com.example.tient.spa.SharedPrefManager;
 import com.example.tient.spa.Util.api.BaseApiService;
 import com.example.tient.spa.Util.api.UtilsApi;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -40,23 +44,38 @@ public class CapNhatTTActivity extends AppCompatActivity {
     SharedPrefManager sharedPrefManager;
     BaseApiService mApiService;
     Context mContext;
+    KhachHang khachHang;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cap_nhat_tt);
         ButterKnife.bind(this);
+
         mContext = CapNhatTTActivity.this;
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        khachHang = new KhachHang();
 
         mApiService = UtilsApi.getApiService();
         sharedPrefManager = new SharedPrefManager(this);
         tbl_taikhoan_username = sharedPrefManager.getSPUsername();
-        Log.i("DEBUG", tbl_taikhoan_username);
+
+        Bundle bundle = getIntent().getBundleExtra("AccountActivitySend");
+        Log.i("DEBUG", khachHang.getHoten());
+        editUpdateHT.setText(bundle.getString("hoten"));
+        editUpdateDiaChi.setText(bundle.getString("diachi"));
+        editUpdateSDT.setText(bundle.getString("sdt"));
+        editUpdatNS.setText(bundle.getString("ngaysinh"));
 
         String[] listGT = {"Nam", "Nữ", "Khác"};
         ArrayAdapter<String> adapterGT = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listGT);
         spinnerGioiTinh.setAdapter(adapterGT);
+        for (int i = 0; i < 3; i++) {
+            if (bundle.getString("gioitinh").equals(listGT[i])) {
+                spinnerGioiTinh.setSelection(i);
+                break;
+            }
+        }
 
         gioiTinh = spinnerGioiTinh.getSelectedItem().toString();
     }

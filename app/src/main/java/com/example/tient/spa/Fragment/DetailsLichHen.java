@@ -1,5 +1,6 @@
 package com.example.tient.spa.Fragment;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -60,7 +61,12 @@ public class DetailsLichHen extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(this, LichSuDatLich.class));
+        Intent intent = new Intent(this, LichSuDatLich.class);
+        Bundle bundle = new Bundle();
+        bundle.putBoolean("FLAG_LUU_ARRAY", true);
+        bundle.putString("SDT", sdtkh.getText().toString());
+        intent.putExtra("BUNDLE_FLAG_LUU_ARRAY", bundle);
+        startActivity(intent);
         finish();
     }
 }

@@ -39,8 +39,10 @@ public class DichVuArrayAdapter extends ArrayAdapter<DichVu> {
         }
         DichVu dichVu = myArray.get(position);
         viewHolder.tvTenDichVu.setText(dichVu.getTendichvu());
-        viewHolder.tvGiaDichVu.setText(dichVu.getGiadichvu());
-        Picasso.with(context).load(dichVu.getIcon_dichvu()).resize(220, 220).into(viewHolder.imageView);
+        viewHolder.tvGiaDichVu.setText(dichVu.getGiadichvu() + " VNĐ");
+        if (!dichVu.getIcon_dichvu().equals("")) {
+            Picasso.with(context).load(dichVu.getIcon_dichvu()).resize(220, 220).into(viewHolder.imageView);
+        }
 
         return convertView;
     }
