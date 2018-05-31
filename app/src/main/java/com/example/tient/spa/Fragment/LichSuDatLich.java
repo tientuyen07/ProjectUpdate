@@ -80,9 +80,13 @@ public class LichSuDatLich extends AppCompatActivity {
             }
         });
 
-
         registerForContextMenu(lvQLLH);
 
+        try {
+            Thread.sleep(300);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         if (flag_luu_array) {
             arrLichSu.clear();
             mApiService.LichSuDatLich(bundle.getString("SDT")).enqueue(new Callback<List<DatLich>>() {
@@ -101,6 +105,7 @@ public class LichSuDatLich extends AppCompatActivity {
                         datLich.setTbl_dichvu_has_tbl_phong_tbl_dichvu_ma_dichvu(list.get(i).getTbl_dichvu_has_tbl_phong_tbl_dichvu_ma_dichvu());
                         datLich.setHoten_datlich(list.get(i).getHoten_datlich() + "");
                         datLich.setTbl_dichvu_has_tbl_phong_tbl_phong_maphong(list.get(i).getTbl_dichvu_has_tbl_phong_tbl_phong_maphong() + "");
+                        datLich.setXacnhan(list.get(i).getXacnhan());
                         arrLichSu.add(datLich);
                         adapter.notifyDataSetChanged();
                     }
@@ -137,6 +142,7 @@ public class LichSuDatLich extends AppCompatActivity {
                 bundle.putString("TenKhach", luuDatLich.getHoten_datlich() + "");
                 bundle.putString("SDT", luuDatLich.getSdt_datlich() + "");
                 bundle.putString("TenNhanVien", luuDatLich.getHoten() + "");
+                bundle.putInt("XacNhan", luuDatLich.getXacnhan());
                 bundle.putBoolean("FLAG_LUU_ARRAY", true);
                 intent.putExtra("BundleLichHen", bundle);
                 startActivity(intent);

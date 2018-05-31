@@ -68,7 +68,7 @@ public class DatLichActivity extends AppCompatActivity {
     Context mContext;
     DatLich lichhen = new DatLich();
     BaseApiService mApiService;
-    boolean flag_capnhat = true;
+    boolean flag_capnhat = false;
     boolean flag[] = {false, false, false, false, false, false, false, false, false};
     boolean flag_selected_kg = true;
 
@@ -81,7 +81,7 @@ public class DatLichActivity extends AppCompatActivity {
     int IDNV;
     String k_g;
 
-    boolean flag_update_success = true;
+    boolean flag_update_success = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,7 +106,7 @@ public class DatLichActivity extends AppCompatActivity {
         if (flag_capnhat) {
             editSdt.setText(bundle.getString("SDT"));
             editHvt.setText(bundle.getString("HoTen"));
-            btnDatLich.setText("Cập nhật");
+            btnDatLich.setText("Thay đổi lịch");
             lichhen.setKhunggio(k_g);
             mApiService.DeleteDatLich(ID, "NULL").enqueue(new Callback<ResponseBody>() {
                 @Override
@@ -437,15 +437,33 @@ public class DatLichActivity extends AppCompatActivity {
                 String ngay = (String) spinner_ngayhen.getSelectedItem();
 
                 mApiService.UpdateLich(ID, ngay, lichhen.getKhunggio() + "", editSdt.getText().toString(), editHvt.getText().toString(),
-                        dv.getMa_dichvu(), nv.getId_nhanvien(), p.getTbl_phong_maphong(), 0).enqueue(new Callback<List<DatLich>>() {
+                        dv.getMa_dichvu(), nv.getId_nhanvien(), p.getTbl_phong_maphong(), 0).enqueue(new Callback<ResponseBody>() {
                     @Override
-                    public void onResponse(Call<List<DatLich>> call, Response<List<DatLich>> response) {
-                        Toast.makeText(mContext, "Cập nhật thành công!", Toast.LENGTH_SHORT).show();
-                        flag_update_success = false;
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                        if (response.isSuccessful()) {
+                            try {
+                                JSONObject jsonObject = new JSONObject(response.body().string());
+
+                                // Nếu error = false -----> Success!!!!!
+                                if (jsonObject.getString("error").equals("false")) {
+                                    Toast.makeText(mContext, "Cập nhật thành công!", Toast.LENGTH_SHORT).show();
+                                    flag_update_success = true;
+                                } else {
+                                    String error_message = jsonObject.getString("error_msg");
+                                    Toast.makeText(mContext, error_message, Toast.LENGTH_LONG).show();
+                                    Log.i("DEBUG", "Cập nhật lịch thất bại!!!!!!!!!!!!!");
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+
                     }
 
                     @Override
-                    public void onFailure(Call<List<DatLich>> call, Throwable t) {
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
 
                     }
                 });
@@ -514,7 +532,8 @@ public class DatLichActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        if (flag_capnhat && flag_update_success) {
+        // Nếu cập nhật và không thành công
+        if (flag_capnhat && flag_update_success == false) {
             mApiService.DeleteDatLich(ID, k_g).enqueue(new Callback<ResponseBody>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -527,8 +546,14 @@ public class DatLichActivity extends AppCompatActivity {
                 }
             });
         }
+        // Nếu cập nhật
         if (flag_capnhat) {
-            startActivity(new Intent(this, LichSuDatLich.class));
+            Intent intent = new Intent(this, LichSuDatLich.class);
+            Bundle bundle = new Bundle();
+            bundle.putBoolean("FLAG_LUU_ARRAY", true);
+            bundle.putString("SDT", editSdt.getText().toString());
+            intent.putExtra("BUNDLE_FLAG_LUU_ARRAY", bundle);
+            startActivity(intent);
             finish();
         } else {
             startActivity(new Intent(this, DashboardActivity.class));

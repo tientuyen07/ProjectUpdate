@@ -35,6 +35,8 @@ public class DetailsLichHen extends AppCompatActivity {
     TextView sdtkh;
     @BindView(R.id.tvnv)
     TextView tvnv;
+    @BindView(R.id.trang_thai)
+    TextView trangThai;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +53,16 @@ public class DetailsLichHen extends AppCompatActivity {
         sdtkh.setText(bundle.getString("SDT") + "");
         hvtkh.setText(bundle.getString("TenKhach") + "");
         tvnv.setText(bundle.getString("TenNhanVien") + "");
+        int xacnhan = bundle.getInt("XacNhan");
+        if (xacnhan == 0) {
+            trangThai.setText("Chưa xác nhận");
+        } else if (xacnhan == 1) {
+            trangThai.setText("Đã xác nhận");
+        } else if (xacnhan == -1) {
+            trangThai.setText("Lịch bị hủy");
+        }
     }
+
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();

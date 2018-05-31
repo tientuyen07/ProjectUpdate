@@ -136,5 +136,23 @@
         android:layout_toRightOf="@+id/p"
         android:textSize="23dp"
         android:textStyle="bold" />
+    <TextView
+        android:id="@+id/xacnhan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/p"
+        android:layout_marginTop="10dp"
+        android:text="Trạng thái: "
+        android:textSize="23dp" />
+
+    <TextView
+        android:id="@+id/trang_thai"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/p"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@+id/xacnhan"
+        android:textSize="23dp"
+        android:textStyle="bold" />
 
 </RelativeLayout>

@@ -62,7 +62,7 @@ public interface BaseApiService {
 
     @FormUrlEncoded
     @POST("UpdateLich.php")
-    Call<List<DatLich>> UpdateLich(@Field("id_lichhen") int id_lichhen,
+    Call<ResponseBody> UpdateLich(@Field("id_lichhen") int id_lichhen,
                                    @Field("ngayhen") String ngayhen,
                                    @Field("khunggio") String khunggio,
                                    @Field("sdt_datlich") String sdt_datlich,

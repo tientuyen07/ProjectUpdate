@@ -3,6 +3,9 @@ package com.example.tient.spa.Fragment;
 import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
+import android.os.Process;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.RelativeLayout;
@@ -41,9 +44,9 @@ public class DashboardActivity extends AppCompatActivity {
 
         // Slider Layout
         HashMap<String, Integer> file_maps = new HashMap<String, Integer>();
-        file_maps.put("intro1", R.drawable.intro1);
-        file_maps.put("intro2", R.drawable.intro2);
-        file_maps.put("intro3", R.drawable.intro3);
+        file_maps.put("Không gian lý tưởng", R.drawable.intro1);
+        file_maps.put("Các dịch vụ đa dạng", R.drawable.intro2);
+        file_maps.put("Đội ngũ nhân viên chuyên nghiệp", R.drawable.intro3);
 
         for (String name : file_maps.keySet()) {
             TextSliderView textSliderView = new TextSliderView(mContext);
@@ -99,12 +102,17 @@ public class DashboardActivity extends AppCompatActivity {
 
     @OnClick(R.id.rela_table_6)
     void Exit() {
-        android.os.Process.killProcess(android.os.Process.myPid());
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            finishAndRemoveTask();
+        }
         Intent intent = new Intent(Intent.ACTION_MAIN);
         intent.addCategory(Intent.CATEGORY_HOME);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
-        System.exit(1);
+
+        Process.killProcess(Process.myPid());
+        System.exit(0);
+        finish();
     }
 
     @Override
