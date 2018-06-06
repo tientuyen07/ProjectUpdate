@@ -50,6 +50,16 @@ public interface BaseApiService {
                                       @Field("tbl_dichvu_has_tbl_phong_tbl_phong_maphong") String tbl_dichvu_has_tbl_phong_tbl_phong_maphong);
 
     @FormUrlEncoded
+    @POST("NVTheoGio.php")
+    Call<List<NhanVien>> NVTheoGio(@Field("ngayhen") String ngayhen,
+                                   @Field("khunggio") String khunggio);
+
+    @FormUrlEncoded
+    @POST("PhongTheoGio.php")
+    Call<List<Phong>> PhongTheoGio(@Field("ngayhen") String ngayhen,
+                                   @Field("khunggio") String khunggio);
+
+    @FormUrlEncoded
     @POST("postDatLich.php")
     Call<ResponseBody> DatLich(@Field("ngayhen") String ngayhen,
                                @Field("khunggio") String khunggio,
@@ -63,14 +73,14 @@ public interface BaseApiService {
     @FormUrlEncoded
     @POST("UpdateLich.php")
     Call<ResponseBody> UpdateLich(@Field("id_lichhen") int id_lichhen,
-                                   @Field("ngayhen") String ngayhen,
-                                   @Field("khunggio") String khunggio,
-                                   @Field("sdt_datlich") String sdt_datlich,
-                                   @Field("hoten_datlich") String hoten_datlich,
-                                   @Field("tbl_dichvu_has_tbl_phong_tbl_dichvu_ma_dichvu") int tbl_dichvu_has_tbl_phong_tbl_dichvu_ma_dichvu,
-                                   @Field("tbl_nhanvien_id_nhanvien") int tbl_nhanvien_id_nhanvien,
-                                   @Field("tbl_dichvu_has_tbl_phong_tbl_phong_maphong") String tbl_dichvu_has_tbl_phong_tbl_phong_maphong,
-                                   @Field("xacnhan") int xacnhan);
+                                  @Field("ngayhen") String ngayhen,
+                                  @Field("khunggio") String khunggio,
+                                  @Field("sdt_datlich") String sdt_datlich,
+                                  @Field("hoten_datlich") String hoten_datlich,
+                                  @Field("tbl_dichvu_has_tbl_phong_tbl_dichvu_ma_dichvu") int tbl_dichvu_has_tbl_phong_tbl_dichvu_ma_dichvu,
+                                  @Field("tbl_nhanvien_id_nhanvien") int tbl_nhanvien_id_nhanvien,
+                                  @Field("tbl_dichvu_has_tbl_phong_tbl_phong_maphong") String tbl_dichvu_has_tbl_phong_tbl_phong_maphong,
+                                  @Field("xacnhan") int xacnhan);
 
     @FormUrlEncoded
     @POST("ThongTinKH.php")

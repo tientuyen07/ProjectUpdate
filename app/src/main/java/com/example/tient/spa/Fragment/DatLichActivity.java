@@ -1,7 +1,10 @@
 package com.example.tient.spa.Fragment;
 
 import android.app.ActionBar;
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -62,6 +65,7 @@ public class DatLichActivity extends AppCompatActivity {
 
     ArrayList<DichVu> arrDichVu = new ArrayList<DichVu>();
     ArrayList<NhanVien> arrNhanVien = new ArrayList<NhanVien>();
+    ArrayList<Phong> arrPhong = new ArrayList<Phong>();
     ArrayList<KhungGio> khunggio_details = null;
     CustomGridLayout adapterGridView = null;
     //    DichVuArrayAdapter adapter = null;
@@ -187,6 +191,7 @@ public class DatLichActivity extends AppCompatActivity {
                 Object o = gridView.getItemAtPosition(position);
                 KhungGio khungGio = (KhungGio) o;
                 lichhen.setKhunggio(((KhungGio) o).getKhunggio() + "");
+
                 Log.i("DEBUG", "Selected: " + khungGio.getKhunggio());
             }
         });
@@ -244,7 +249,8 @@ public class DatLichActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<Phong>> call, Response<List<Phong>> response) {
                 List<Phong> list = response.body();
-                ArrayList<Phong> arrPhong = new ArrayList<Phong>();
+                arrPhong.clear();
+                arrPhong.add(new Phong(list.get(0).getTbl_dichvu_ma_dichvu(), "Mặc định"));
                 for (int i = 0; i < list.size(); i++) {
                     arrPhong.add(new Phong(list.get(i).getTbl_dichvu_ma_dichvu(), list.get(i).getTbl_phong_maphong() + ""));
                 }
@@ -252,8 +258,8 @@ public class DatLichActivity extends AppCompatActivity {
                 spinner_phong.setAdapter(adapter);
 
                 if (flag_capnhat) {
-                    for (int i = 0; i < list.size(); i++) {
-                        if ((list.get(i).getTbl_phong_maphong() + "").equals(p)) {
+                    for (int i = 1; i < arrPhong.size(); i++) {
+                        if ((arrPhong.get(i).getTbl_phong_maphong() + "").equals(p)) {
                             spinner_phong.setSelection(i);
                             break;
                         }
@@ -292,15 +298,17 @@ public class DatLichActivity extends AppCompatActivity {
                 ArrayAdapter<NhanVien> adapter;
                 final List<NhanVien> list = response.body();
                 Log.i("DEBUG", list.size() + "");
+                arrNhanVien.add(new NhanVien(0, "Mặc định"));
                 for (int i = 0; i < list.size(); i++) {
                     arrNhanVien.add(new NhanVien(list.get(i).getId_nhanvien(), list.get(i).getTenNhanVien() + ""));
                 }
                 adapter = new ArrayAdapter<NhanVien>(mContext, android.R.layout.simple_spinner_item, arrNhanVien);
                 spinner_nv.setAdapter(adapter);
 
+                Log.i("CapNhat", n_v + "");
                 if (flag_capnhat) {
-                    for (int i = 0; i < list.size(); i++) {
-                        if ((list.get(i).getTenNhanVien() + "").equals(n_v)) {
+                    for (int i = 1; i < arrNhanVien.size(); i++) {
+                        if ((arrNhanVien.get(i).getTenNhanVien() + "").equals(n_v)) {
                             spinner_nv.setSelection(i);
                             break;
                         }
@@ -419,76 +427,106 @@ public class DatLichActivity extends AppCompatActivity {
 
         // Kiểm tra khung giờ chọn có bị trùng hay không
         for (int i = 0; i < 9; i++) {
-            if ((khunggio_details.get(i).getTrangthaiNV() + "").equals("NV đã có lịch")
-                    || (khunggio_details.get(i).getTrangthaiPhong() + "").equals("Hết chỗ")) {
-                flag_khunggio = false;
-                Toast.makeText(mContext, "Xin quý khách chọn khung giờ khác!", Toast.LENGTH_SHORT).show();
+            if ((khunggio_details.get(i).getKhunggio() + "").equals(lichhen.getKhunggio() + "")) {
+                if ((khunggio_details.get(i).getTrangthaiNV() + "").equals("NV đã có lịch")
+                        || (khunggio_details.get(i).getTrangthaiPhong() + "").equals("Hết chỗ")) {
+                    flag_khunggio = false;
+                    Toast.makeText(mContext, "Xin quý khách chọn khung giờ khác!", Toast.LENGTH_SHORT).show();
+                    break;
+                }
                 break;
             }
         }
 
-        // Nếu sđt và hvt đã được điền đầy đủ
-        // Nếu khung giờ không bị trùng
-        if (flag_sdt && flag_hvt && flag_khunggio) {
-            if (flag_capnhat == true) {
-                DichVu dv = (DichVu) spinner_dv.getSelectedItem();
-                NhanVien nv = (NhanVien) spinner_nv.getSelectedItem();
-                Phong p = (Phong) spinner_phong.getSelectedItem();
-                String ngay = (String) spinner_ngayhen.getSelectedItem();
-
-                mApiService.UpdateLich(ID, ngay, lichhen.getKhunggio() + "", editSdt.getText().toString(), editHvt.getText().toString(),
-                        dv.getMa_dichvu(), nv.getId_nhanvien(), p.getTbl_phong_maphong(), 0).enqueue(new Callback<ResponseBody>() {
-                    @Override
-                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                        if (response.isSuccessful()) {
-                            try {
-                                JSONObject jsonObject = new JSONObject(response.body().string());
-
-                                // Nếu error = false -----> Success!!!!!
-                                if (jsonObject.getString("error").equals("false")) {
-                                    Toast.makeText(mContext, "Cập nhật thành công!", Toast.LENGTH_SHORT).show();
-                                    flag_update_success = true;
-                                } else {
-                                    String error_message = jsonObject.getString("error_msg");
-                                    Toast.makeText(mContext, error_message, Toast.LENGTH_LONG).show();
-                                    Log.i("DEBUG", "Cập nhật lịch thất bại!!!!!!!!!!!!!");
+        // Nếu nhân viên chọn mặc định
+        if (lichhen.getTbl_nhanvien_id_nhanvien() == 0) {
+            mApiService.NVTheoGio(lichhen.getNgayhen() + "", lichhen.getKhunggio() + "").enqueue(new Callback<List<NhanVien>>() {
+                @Override
+                public void onResponse(Call<List<NhanVien>> call, Response<List<NhanVien>> response) {
+                    if (response.isSuccessful()) {
+                        List<NhanVien> list = response.body();
+                        if (list.size() == 0) {
+                            lichhen.setTbl_nhanvien_id_nhanvien(arrNhanVien.get(1).getId_nhanvien());
+                        } else {
+                            for (int i = 1; i < arrNhanVien.size(); i++) {
+                                boolean check = false;
+                                for (int j = 0; j < list.size(); j++) {
+                                    if (arrNhanVien.get(i).getId_nhanvien() == list.get(j).getId_nhanvien()) {
+                                        check = true;
+                                        break;
+                                    }
                                 }
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            } catch (IOException e) {
-                                e.printStackTrace();
+                                if (check == false) {
+                                    lichhen.setTbl_nhanvien_id_nhanvien(arrNhanVien.get(i).getId_nhanvien());
+                                    break;
+                                }
                             }
                         }
-
                     }
+                    Log.i("DEBUG ON NV THEO GIO", lichhen.getTbl_nhanvien_id_nhanvien() + "");
+                }
 
-                    @Override
-                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                @Override
+                public void onFailure(Call<List<NhanVien>> call, Throwable t) {
 
+                }
+            });
+        }
+
+        // Nếu không chọn phòng mà để mặc định
+        if (lichhen.getTbl_dichvu_has_tbl_phong_tbl_phong_maphong().equals("Mặc định")) {
+            mApiService.PhongTheoGio(lichhen.getNgayhen() + "", lichhen.getKhunggio() + "").enqueue(new Callback<List<Phong>>() {
+                @Override
+                public void onResponse(Call<List<Phong>> call, Response<List<Phong>> response) {
+                    if (response.isSuccessful()) {
+                        List<Phong> list = response.body();
+                        if (list.size() == 0) {
+                            lichhen.setTbl_dichvu_has_tbl_phong_tbl_phong_maphong(arrPhong.get(1).getTbl_phong_maphong());
+                        } else {
+                            for (int i = 1; i < arrPhong.size(); i++) {
+                                boolean check = false;
+                                for (int j = 0; j < list.size(); j++) {
+                                    if (arrPhong.get(i).getTbl_phong_maphong().equals(list.get(j).getTbl_phong_maphong())) {
+                                        check = true;
+                                        break;
+                                    }
+                                }
+                                if (check == false) {
+                                    lichhen.setTbl_dichvu_has_tbl_phong_tbl_phong_maphong(arrPhong.get(i).getTbl_phong_maphong());
+                                    break;
+                                }
+                            }
+                        }
                     }
-                });
-            }
+                    Log.i("DEBUG Phong Theo Gio", lichhen.getTbl_dichvu_has_tbl_phong_tbl_phong_maphong());
+                }
 
-            // Nếu đổi sang dịch vụ khác --> Khung giờ load lại.
-            // Sau khi load lại mà chưa chọn khung giờ, xong gửi luôn sẽ báo khung giờ chưa chọn
-            Log.i("DEBUG", "" + flag_selected_kg);
-            if (flag_selected_kg) {
-                Toast.makeText(mContext, "Bạn chưa chọn khung giờ!", Toast.LENGTH_SHORT).show();
-            }
+                @Override
+                public void onFailure(Call<List<Phong>> call, Throwable t) {
 
-            // Nếu không phải là cập nhật mà là đặt lịch mới
-            // Nếu khung giờ đã được chọn => Gửi đặt lịch
-            // Lỗi nếu sđt đã đặt lịch cùng ngày và giờ với dữ liệu có sẵn
-            if (flag_capnhat == false && flag_selected_kg == false) {
-                mApiService.DatLich(lichhen.getNgayhen(),
-                        lichhen.getKhunggio(),
-                        editSdt.getText().toString(),
-                        editHvt.getText().toString(),
-                        lichhen.getTbl_dichvu_has_tbl_phong_tbl_dichvu_ma_dichvu(),
-                        lichhen.getTbl_nhanvien_id_nhanvien(),
-                        lichhen.getTbl_dichvu_has_tbl_phong_tbl_phong_maphong(),
-                        0).enqueue(
-                        new Callback<ResponseBody>() {
+                }
+            });
+        }
+
+        // Nếu sđt và hvt đã được điền đầy đủ
+        // Nếu khung giờ không bị trùng
+        // Nếu biến không còn là mặc định
+        if (flag_sdt && flag_hvt && flag_khunggio) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Xác nhận đặt lịch");
+            builder.setMessage("Bạn muốn đặt lịch với Số điện thoại: " + editSdt.getText().toString());
+            builder.setCancelable(false);
+            builder.setNegativeButton("Yes", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    if (flag_capnhat == true) {
+                        DichVu dv = (DichVu) spinner_dv.getSelectedItem();
+                        NhanVien nv = (NhanVien) spinner_nv.getSelectedItem();
+                        Phong p = (Phong) spinner_phong.getSelectedItem();
+                        String ngay = (String) spinner_ngayhen.getSelectedItem();
+
+                        mApiService.UpdateLich(ID, ngay, lichhen.getKhunggio() + "", editSdt.getText().toString(), editHvt.getText().toString(),
+                                dv.getMa_dichvu(), nv.getId_nhanvien(), p.getTbl_phong_maphong(), 0).enqueue(new Callback<ResponseBody>() {
                             @Override
                             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                                 if (response.isSuccessful()) {
@@ -497,12 +535,12 @@ public class DatLichActivity extends AppCompatActivity {
 
                                         // Nếu error = false -----> Success!!!!!
                                         if (jsonObject.getString("error").equals("false")) {
-                                            Toast.makeText(mContext, "Đặt lịch thành công", Toast.LENGTH_SHORT).show();
-                                            Log.i("DEBUG", "Đặt lịch thành công!!!!!!!!!!!!!");
+                                            Toast.makeText(mContext, "Cập nhật thành công!", Toast.LENGTH_LONG).show();
+                                            flag_update_success = true;
                                         } else {
                                             String error_message = jsonObject.getString("error_msg");
                                             Toast.makeText(mContext, error_message, Toast.LENGTH_LONG).show();
-                                            Log.i("DEBUG", "Đặt lịch thất bại!!!!!!!!!!!!!");
+                                            Log.i("DEBUG", "Cập nhật lịch thất bại!!!!!!!!!!!!!");
                                         }
                                     } catch (JSONException e) {
                                         e.printStackTrace();
@@ -510,16 +548,79 @@ public class DatLichActivity extends AppCompatActivity {
                                         e.printStackTrace();
                                     }
                                 }
+
                             }
 
                             @Override
                             public void onFailure(Call<ResponseBody> call, Throwable t) {
 
                             }
-                        }
-                );
-            }
+                        });
+                    }
 
+                    // Nếu đổi sang dịch vụ khác --> Khung giờ load lại.
+                    // Sau khi load lại mà chưa chọn khung giờ, xong gửi luôn sẽ báo khung giờ chưa chọn
+                    Log.i("DEBUG", "" + flag_selected_kg);
+                    if (flag_selected_kg) {
+                        Toast.makeText(mContext, "Bạn chưa chọn khung giờ!", Toast.LENGTH_SHORT).show();
+                    }
+
+                    // Nếu không phải là cập nhật mà là đặt lịch mới
+                    // Nếu khung giờ đã được chọn => Gửi đặt lịch
+                    // Lỗi nếu sđt đã đặt lịch cùng ngày và giờ với dữ liệu có sẵn
+                    if (flag_capnhat == false && flag_selected_kg == false) {
+                        mApiService.DatLich(lichhen.getNgayhen(),
+                                lichhen.getKhunggio(),
+                                editSdt.getText().toString(),
+                                editHvt.getText().toString(),
+                                lichhen.getTbl_dichvu_has_tbl_phong_tbl_dichvu_ma_dichvu(),
+                                lichhen.getTbl_nhanvien_id_nhanvien(),
+                                lichhen.getTbl_dichvu_has_tbl_phong_tbl_phong_maphong(),
+                                0).enqueue(
+                                new Callback<ResponseBody>() {
+                                    @Override
+                                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                                        if (response.isSuccessful()) {
+                                            try {
+                                                JSONObject jsonObject = new JSONObject(response.body().string());
+
+                                                // Nếu error = false -----> Success!!!!!
+                                                if (jsonObject.getString("error").equals("false")) {
+                                                    Toast.makeText(mContext, "Đặt lịch thành công", Toast.LENGTH_SHORT).show();
+                                                    Log.i("DEBUG", "Đặt lịch thành công!!!!!!!!!!!!!");
+                                                    startActivity(new Intent(mContext, DashboardActivity.class));
+                                                    finish();
+                                                } else {
+                                                    String error_message = jsonObject.getString("error_msg");
+                                                    Toast.makeText(mContext, error_message, Toast.LENGTH_LONG).show();
+                                                    Log.i("DEBUG", "Đặt lịch thất bại!!!!!!!!!!!!!");
+                                                }
+                                            } catch (JSONException e) {
+                                                e.printStackTrace();
+                                            } catch (IOException e) {
+                                                e.printStackTrace();
+                                            }
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+                                    }
+                                }
+                        );
+                    }
+                }
+            });
+            builder.setPositiveButton("No", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    dialogInterface.dismiss();
+                }
+            });
+
+            AlertDialog alertDialog = builder.create();
+            alertDialog.show();
         }
     }
 
